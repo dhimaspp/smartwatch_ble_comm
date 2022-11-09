@@ -77,7 +77,7 @@ public class WatchConnectionPlugin: FlutterPlugin, MethodCallHandler, ActivityAw
     private fun registerMessageListener(call: MethodCall) {
         try {
             val id = call.arguments<Int>()
-            messageListenerIds.add(id)
+            messageListenerIds.add(id!!)
         } catch (ex: Exception) {
             Log.e(TAG, ex.localizedMessage, ex)
         }
@@ -86,7 +86,7 @@ public class WatchConnectionPlugin: FlutterPlugin, MethodCallHandler, ActivityAw
     private fun registerDataLayerListener(call: MethodCall) {
         try {
             val id = call.arguments<Int>()
-            dataListenerIds.add(id)
+            dataListenerIds.add(id!!)
         } catch (ex: Exception) {
             Log.e(TAG, ex.localizedMessage, ex)
         }
@@ -108,7 +108,7 @@ public class WatchConnectionPlugin: FlutterPlugin, MethodCallHandler, ActivityAw
                     }
                     result.success(null)
                 }.addOnFailureListener { ex ->
-                    result.error(ex.message, ex.localizedMessage, ex)
+                    result.error(ex.message.orEmpty(), ex.localizedMessage, ex)
                 }
 
             } catch (ex: Exception) {
